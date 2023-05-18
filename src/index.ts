@@ -62,8 +62,11 @@ function createStream(sse: ServerEventEmitter, server: EmittingServer){
   const stream = new ReadableStream({
     start(controller){
       const listener = () => {
-        controller.enqueue("data: " + server.latestMessage + "\n\n");
-
+        try{
+          controller.enqueue("data: " + server.latestMessage + "\n\n");
+        }catch(e){
+          console.log(e)
+        }
       }
       sse.emitter.on(sse.trigger, listener);
     },
