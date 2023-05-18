@@ -23,6 +23,7 @@ class CircularBuffer{
   }
 
   get lastItem(): string {
+    if(this.size === 0) throw new Error("Buffer is empty");
     return this.buffer[this.tail - 1];
   }
 }
