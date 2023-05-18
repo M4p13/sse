@@ -67,8 +67,9 @@ function createStream(sse: ServerEventEmitter, server: EmittingServer){
       }
       sse.emitter.on(sse.trigger, listener);
     },
-    cancel(){
+    cancel(controller){
       sse.emitter.removeAllListeners(sse.trigger);
+      controller.close();
       server.removeEventEmitter(sse);
     }
   })
